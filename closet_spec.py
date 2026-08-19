@@ -256,22 +256,41 @@ expected_overlaps = 24
 elevation_walls = ["left", "right", "back"]
 
 
-def _drawer_sheet(spec, outdir):
-    """Hardware first (it reads assembly.md + cutlist.json), then the drawer
-    sheet — which rebuilds the packet last, pulling both into the PDF."""
+def _project_path():
     import os
     _here = os.path.dirname(os.path.abspath(__file__))
     if _here not in sys.path:
         sys.path.insert(0, _here)
+
+
+def _sheets(spec, outdir):
+    """Hardware first — it reads assembly.md and cutlist.json, both of which
+    package.py has already written by the time extra_outputs runs."""
+    _project_path()
+    import costing
     import hardware
-    import render_scene
     import drawers
     return (hardware.build(spec, outdir)
-            + render_scene.build(spec, outdir)   # must follow package's own render
-            + drawers.build(spec, outdir))       # rebuilds the packet last
+            + costing.build(spec, outdir)
+            + drawers.build(spec, outdir))
 
 
-extra_outputs = [_drawer_sheet]
+def _render(spec, outdir):
+    """Our presentation render, run INSTEAD of the stock one."""
+    _project_path()
+    import render_scene
+    return render_scene.build(spec, outdir)
+
+
+extra_outputs = [_sheets]
+
+# Run our renderer in place of package.py's. Before skill PR #3 there was no way
+# to do this: writing render.html afterwards meant the next plain package.py run
+# silently overwrote it, which went unnoticed here for ten revisions.
+replaces = {"render": _render}
+
+# The packet is built last now, so sheets produced above can go into it.
+packet_docs = ["cutlist.md", "assembly.md", "drawers.md", "hardware.md", "cost.md"]
 
 _BAND_FRONT = ["L_Side", "R_Side",
                "L_Bottom", "R_Bottom", "L_Shelf", "R_Shelf",

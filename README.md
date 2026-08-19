@@ -21,10 +21,14 @@ Built with the [furniture-design skill](https://github.com/mhorvvitz/furniture-d
 ## Regenerate everything
 
 ```bash
-python <skill>/scripts/package.py closet_spec.py --out output/
-python supplier_cutlist.py && python costing.py && python make_index.py
-python consistency.py          # cross-checks every output against the spec
+python <skill>/scripts/package.py closet_spec.py --out output/   # the whole package
+python supplier_cutlist.py && python make_index.py               # supplier sheet + site
+python consistency.py                                            # cross-check
 ```
+
+`closet_spec.py` declares three hooks the skill honours: `extra_outputs` for the
+hardware, cost and drawer sheets; `replaces` so the project's own renderer runs
+instead of the stock one; and `packet_docs` so all five documents land in the PDF.
 
 `consistency.py` validates the cut list against the spec, the supplier sheet
 against the cut list, the hardware schedule against the assembly plan, and every

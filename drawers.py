@@ -7,6 +7,10 @@ because this project's drawer boxes are glued+pinned rather than drilled, so
 they carry no joint entry at all. Without this sheet the packet tells a carpenter
 to "Install L_BoxSide" and nothing else.
 
+It used to rebuild packet.pdf itself, because extra_outputs ran after the packet
+was already built. Fixed upstream (skill PR #3): the packet now builds last and
+takes its document list from `packet_docs`, so this just writes its sheet.
+
 Every dimension is derived from closet_spec.py — nothing is retyped. The one
 thing deliberately NOT emitted is the runner's own fixing-hole pattern: that
 belongs to its datasheet (hard rule 13).
@@ -130,7 +134,7 @@ def build(spec=None, outdir="output"):
     a("5. Fit the pull last, through both the front and its shaker rail.\n")
 
     a("\n## 6 — Order of operations\n")
-    a("1. Cut and (if Option A) groove all box parts.")
+    a("1. Cut all box parts and groove them for the bottom.")
     a("2. Glue and pin the six boxes; check diagonals; leave to cure.")
     a("3. Fit the bottoms.")
     a("4. Mount cabinet members in all six bays; check level and parallel.")
@@ -141,41 +145,7 @@ def build(spec=None, outdir="output"):
 
     with open(p, "w", encoding="utf-8") as f:
         f.write("\n".join(L))
-    return ["drawers.md"] + _rebuild_packet(outdir)
-
-
-def _rebuild_packet(outdir):
-    """package.py runs extra_outputs AFTER building the packet, and its packet
-    md-list is hardcoded to [cutlist, assembly] — so a sheet produced here can
-    never reach packet.pdf. Rebuild it with the full set, including every wall
-    elevation, which the stock packet also omits.
-    """
-    import datetime
-    import glob
-    import packet
-
-    def op(n):
-        return os.path.join(outdir, n)
-
-    views = [op("plan.svg"), op("front.svg")] + sorted(glob.glob(op("elev_*.svg")))
-    mds = [op("cutlist.md"), op("assembly.md"), op("drawers.md"),
-           op("hardware.md"), op("cost.md")]
-    mds = [m for m in mds if os.path.exists(m)]
-    views = [v for v in views if os.path.exists(v)]
-
-    O = S.spec.get("overall", {})
-    overall = f"{O.get('W')}x{O.get('H')}x{O.get('D')}"
-    html = packet.build_html(
-        S.project, S.project, overall, "mm", S.rev,
-        datetime.date.today().isoformat(), views, mds, None)
-
-    hp, pp = op("packet.html"), op("packet.pdf")
-    with open(hp, "w", encoding="utf-8") as f:
-        f.write(html)
-    b = packet.find_browser()
-    if b and packet.print_pdf(b, hp, pp)[0]:
-        return ["packet.pdf (rebuilt: + elevations + drawers)"]
-    return ["packet.html (rebuilt; no browser for PDF)"]
+    return ["drawers.md"]
 
 
 if __name__ == "__main__":

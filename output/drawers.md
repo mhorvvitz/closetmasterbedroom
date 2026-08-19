@@ -84,7 +84,7 @@ Applied shaker fronts, **594 × 220**, 3 mm reveal all round. They are *not* par
 
 ## 6 — Order of operations
 
-1. Cut and (if Option A) groove all box parts.
+1. Cut all box parts and groove them for the bottom.
 2. Glue and pin the six boxes; check diagonals; leave to cure.
 3. Fit the bottoms.
 4. Mount cabinet members in all six bays; check level and parallel.
