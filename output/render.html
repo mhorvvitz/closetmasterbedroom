@@ -1,0 +1,242 @@
+<!doctype html><html><head><meta charset="utf-8">
+<title>Master Bedroom Walk-In Closet</title>
+<style>
+ html,body{margin:0;height:100%;background:#efece6;overflow:hidden;
+   font:13px/1.5 -apple-system,Segoe UI,Roboto,sans-serif;color:#2b2b2b}
+ canvas{display:block}
+ #hud{position:fixed;left:16px;top:16px;background:rgba(255,255,255,.9);
+   border:1px solid #d8d2c6;border-radius:8px;padding:12px 14px;min-width:190px}
+ #hud h1{margin:0 0 2px;font-size:14px}
+ #hud .sub{color:#7a7268;font-size:11px;margin-bottom:10px}
+ label{display:flex;align-items:center;gap:8px;padding:3px 0;cursor:pointer}
+ input{accent-color:#8a6d3b;width:15px;height:15px}
+ #fin{margin-top:11px;padding-top:9px;border-top:1px solid #e2ddd2}
+ #fin .lbl{font-size:11px;color:#7a7268;margin-bottom:6px}
+ #sw{display:flex;gap:6px}
+ #sw button{width:28px;height:28px;border-radius:6px;border:2px solid #d8d2c6;
+   cursor:pointer;padding:0}
+ #sw button.on{border-color:#4a4a50;box-shadow:0 0 0 2px rgba(74,74,80,.18)}
+ #vw{display:flex;flex-wrap:wrap;gap:4px}
+ #vw button{font:11px inherit;padding:4px 8px;border-radius:5px;
+   border:1px solid #d8d2c6;background:#fbfaf7;cursor:pointer}
+ #vw button:hover{background:#f0ece3}
+ #tip{position:fixed;left:16px;bottom:14px;color:#8a8175;font-size:11px}
+</style></head><body>
+<div id="hud">
+  <h1>Master Bedroom Walk-In Closet</h1>
+  <div class="sub">1650 &times; 2600 &times; 1600 mm</div>
+  <label><input type="checkbox" id="ctx" checked> Room &amp; bathroom door</label>
+  <label><input type="checkbox" id="cnt" checked> Contents</label>
+  <label><input type="checkbox" id="towL" checked> Left tower</label>
+  <label><input type="checkbox" id="towR" checked> Right tower</label>
+  <label><input type="checkbox" id="hang" checked> Hanging &amp; divider</label>
+  <label><input type="checkbox" id="deck" checked> Decks &amp; uprights</label>
+  <div id="fin">
+    <div class="lbl">View</div>
+    <div id="vw">
+      <button data-v="iso">Iso</button><button data-v="front">Front</button
+      ><button data-v="left">Left</button><button data-v="right">Right</button
+      ><button data-v="top">Top</button>
+    </div>
+  </div>
+  <div id="fin">
+    <div class="lbl">Board finish</div>
+    <div id="sw">
+      <button class="on" data-c="#f2f0ec" title="White (as built)"></button>
+      <button data-c="#9caf88" title="Sage green"></button>
+      <button data-c="#a8c3d4" title="Light blue"></button>
+      <button data-c="#9b9b98" title="Grey"></button>
+      <button data-c="#3c4a52" title="Charcoal"></button>
+    </div>
+  </div>
+</div>
+<div id="tip">drag to orbit &middot; scroll to zoom</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const D={"parts": [{"x": 0, "y": 0, "z": -417, "sx": 370, "sy": 2250, "sz": 17, "k": "", "m": "melamine", "n": "L_Side", "g": "L"}, {"x": 0, "y": 0, "z": -1000, "sx": 370, "sy": 2250, "sz": 17, "k": "", "m": "melamine", "n": "L_Side", "g": "L"}, {"x": 0, "y": 0, "z": -983, "sx": 370, "sy": 17, "sz": 566, "k": "", "m": "melamine", "n": "L_Bottom", "g": "L"}, {"x": 0, "y": 150, "z": -983, "sx": 370, "sy": 17, "sz": 566, "k": "", "m": "melamine", "n": "L_ShoeShelf", "g": "L"}, {"x": 0, "y": 285, "z": -983, "sx": 370, "sy": 17, "sz": 566, "k": "", "m": "melamine", "n": "L_ShoeShelf", "g": "L"}, {"x": 0, "y": 420, "z": -983, "sx": 370, "sy": 17, "sz": 566, "k": "", "m": "melamine", "n": "L_ShoeShelf", "g": "L"}, {"x": 0, "y": 555, "z": -983, "sx": 370, "sy": 17, "sz": 566, "k": "", "m": "melamine", "n": "L_Shelf", "g": "L"}, {"x": 0, "y": 799, "z": -983, "sx": 370, "sy": 17, "sz": 566, "k": "", "m": "melamine", "n": "L_Shelf", "g": "L"}, {"x": 0, "y": 1043, "z": -983, "sx": 370, "sy": 17, "sz": 566, "k": "", "m": "melamine", "n": "L_Shelf", "g": "L"}, {"x": 0, "y": 1287, "z": -983, "sx": 370, "sy": 17, "sz": 566, "k": "", "m": "melamine", "n": "L_Shelf", "g": "L"}, {"x": 0, "y": 1530, "z": -983, "sx": 370, "sy": 17, "sz": 566, "k": "", "m": "melamine", "n": "L_Shelf", "g": "L"}, {"x": 0, "y": 1900, "z": -983, "sx": 370, "sy": 17, "sz": 566, "k": "", "m": "melamine", "n": "L_Shelf", "g": "L"}, {"x": 370, "y": 576, "z": -997, "sx": 17, "sy": 220, "sz": 594, "k": "door", "m": "melamine", "n": "L_DrawerFront", "g": "L"}, {"x": 387, "y": 576, "z": -997, "sx": 17, "sy": 50, "sz": 594, "k": "door", "m": "melamine", "n": "L_ShakerRail", "g": "L"}, {"x": 387, "y": 746, "z": -997, "sx": 17, "sy": 50, "sz": 594, "k": "door", "m": "melamine", "n": "L_ShakerRail", "g": "L"}, {"x": 387, "y": 626, "z": -453, "sx": 17, "sy": 120, "sz": 50, "k": "door", "m": "melamine", "n": "L_ShakerStile", "g": "L"}, {"x": 387, "y": 626, "z": -997, "sx": 17, "sy": 120, "sz": 50, "k": "door", "m": "melamine", "n": "L_ShakerStile", "g": "L"}, {"x": 404, "y": 676.0, "z": -800.0, "sx": 35, "sy": 20, "sz": 200, "k": "fixture", "m": "steel", "n": "L_Pull", "g": "L"}, {"x": 370, "y": 820, "z": -997, "sx": 17, "sy": 220, "sz": 594, "k": "door", "m": "melamine", "n": "L_DrawerFront", "g": "L"}, {"x": 387, "y": 820, "z": -997, "sx": 17, "sy": 50, "sz": 594, "k": "door", "m": "melamine", "n": "L_ShakerRail", "g": "L"}, {"x": 387, "y": 990, "z": -997, "sx": 17, "sy": 50, "sz": 594, "k": "door", "m": "melamine", "n": "L_ShakerRail", "g": "L"}, {"x": 387, "y": 870, "z": -453, "sx": 17, "sy": 120, "sz": 50, "k": "door", "m": "melamine", "n": "L_ShakerStile", "g": "L"}, {"x": 387, "y": 870, "z": -997, "sx": 17, "sy": 120, "sz": 50, "k": "door", "m": "melamine", "n": "L_ShakerStile", "g": "L"}, {"x": 404, "y": 920.0, "z": -800.0, "sx": 35, "sy": 20, "sz": 200, "k": "fixture", "m": "steel", "n": "L_Pull", "g": "L"}, {"x": 370, "y": 1064, "z": -997, "sx": 17, "sy": 220, "sz": 594, "k": "door", "m": "melamine", "n": "L_DrawerFront", "g": "L"}, {"x": 387, "y": 1064, "z": -997, "sx": 17, "sy": 50, "sz": 594, "k": "door", "m": "melamine", "n": "L_ShakerRail", "g": "L"}, {"x": 387, "y": 1234, "z": -997, "sx": 17, "sy": 50, "sz": 594, "k": "door", "m": "melamine", "n": "L_ShakerRail", "g": "L"}, {"x": 387, "y": 1114, "z": -453, "sx": 17, "sy": 120, "sz": 50, "k": "door", "m": "melamine", "n": "L_ShakerStile", "g": "L"}, {"x": 387, "y": 1114, "z": -997, "sx": 17, "sy": 120, "sz": 50, "k": "door", "m": "melamine", "n": "L_ShakerStile", "g": "L"}, {"x": 404, "y": 1164.0, "z": -800.0, "sx": 35, "sy": 20, "sz": 200, "k": "fixture", "m": "steel", "n": "L_Pull", "g": "L"}, {"x": 0, "y": 585, "z": -445.0, "sx": 320, "sy": 180, "sz": 15, "k": "", "m": "plywood_birch", "n": "L_BoxSide", "g": "L"}, {"x": 0, "y": 585, "z": -970.0, "sx": 320, "sy": 180, "sz": 15, "k": "", "m": "plywood_birch", "n": "L_BoxSide", "g": "L"}, {"x": 0, "y": 585, "z": -955.0, "sx": 15, "sy": 180, "sz": 510, "k": "", "m": "plywood_birch", "n": "L_BoxFB", "g": "L"}, {"x": 305, "y": 585, "z": -955.0, "sx": 15, "sy": 180, "sz": 510, "k": "", "m": "plywood_birch", "n": "L_BoxFB", "g": "L"}, {"x": 9, "y": 595, "z": -961.0, "sx": 302, "sy": 6, "sz": 522, "k": "", "m": "plywood_birch", "n": "L_BoxBottom", "g": "L"}, {"x": 0, "y": 829, "z": -445.0, "sx": 320, "sy": 180, "sz": 15, "k": "", "m": "plywood_birch", "n": "L_BoxSide", "g": "L"}, {"x": 0, "y": 829, "z": -970.0, "sx": 320, "sy": 180, "sz": 15, "k": "", "m": "plywood_birch", "n": "L_BoxSide", "g": "L"}, {"x": 0, "y": 829, "z": -955.0, "sx": 15, "sy": 180, "sz": 510, "k": "", "m": "plywood_birch", "n": "L_BoxFB", "g": "L"}, {"x": 305, "y": 829, "z": -955.0, "sx": 15, "sy": 180, "sz": 510, "k": "", "m": "plywood_birch", "n": "L_BoxFB", "g": "L"}, {"x": 9, "y": 839, "z": -961.0, "sx": 302, "sy": 6, "sz": 522, "k": "", "m": "plywood_birch", "n": "L_BoxBottom", "g": "L"}, {"x": 0, "y": 1073, "z": -445.0, "sx": 320, "sy": 180, "sz": 15, "k": "", "m": "plywood_birch", "n": "L_BoxSide", "g": "L"}, {"x": 0, "y": 1073, "z": -970.0, "sx": 320, "sy": 180, "sz": 15, "k": "", "m": "plywood_birch", "n": "L_BoxSide", "g": "L"}, {"x": 0, "y": 1073, "z": -955.0, "sx": 15, "sy": 180, "sz": 510, "k": "", "m": "plywood_birch", "n": "L_BoxFB", "g": "L"}, {"x": 305, "y": 1073, "z": -955.0, "sx": 15, "sy": 180, "sz": 510, "k": "", "m": "plywood_birch", "n": "L_BoxFB", "g": "L"}, {"x": 9, "y": 1083, "z": -961.0, "sx": 302, "sy": 6, "sz": 522, "k": "", "m": "plywood_birch", "n": "L_BoxBottom", "g": "L"}, {"x": 1280, "y": 0, "z": -417, "sx": 370, "sy": 2250, "sz": 17, "k": "", "m": "melamine", "n": "R_Side", "g": "R"}, {"x": 1280, "y": 0, "z": -1000, "sx": 370, "sy": 2250, "sz": 17, "k": "", "m": "melamine", "n": "R_Side", "g": "R"}, {"x": 1280, "y": 0, "z": -983, "sx": 370, "sy": 17, "sz": 566, "k": "", "m": "melamine", "n": "R_Bottom", "g": "R"}, {"x": 1280, "y": 150, "z": -983, "sx": 370, "sy": 17, "sz": 566, "k": "", "m": "melamine", "n": "R_ShoeShelf", "g": "R"}, {"x": 1280, "y": 285, "z": -983, "sx": 370, "sy": 17, "sz": 566, "k": "", "m": "melamine", "n": "R_ShoeShelf", "g": "R"}, {"x": 1280, "y": 420, "z": -983, "sx": 370, "sy": 17, "sz": 566, "k": "", "m": "melamine", "n": "R_ShoeShelf", "g": "R"}, {"x": 1280, "y": 555, "z": -983, "sx": 370, "sy": 17, "sz": 566, "k": "", "m": "melamine", "n": "R_Shelf", "g": "R"}, {"x": 1280, "y": 799, "z": -983, "sx": 370, "sy": 17, "sz": 566, "k": "", "m": "melamine", "n": "R_Shelf", "g": "R"}, {"x": 1280, "y": 1043, "z": -983, "sx": 370, "sy": 17, "sz": 566, "k": "", "m": "melamine", "n": "R_Shelf", "g": "R"}, {"x": 1280, "y": 1287, "z": -983, "sx": 370, "sy": 17, "sz": 566, "k": "", "m": "melamine", "n": "R_Shelf", "g": "R"}, {"x": 1280, "y": 1530, "z": -983, "sx": 370, "sy": 17, "sz": 566, "k": "", "m": "melamine", "n": "R_Shelf", "g": "R"}, {"x": 1280, "y": 1900, "z": -983, "sx": 370, "sy": 17, "sz": 566, "k": "", "m": "melamine", "n": "R_Shelf", "g": "R"}, {"x": 1263, "y": 576, "z": -997, "sx": 17, "sy": 220, "sz": 594, "k": "door", "m": "melamine", "n": "R_DrawerFront", "g": "R"}, {"x": 1246, "y": 576, "z": -997, "sx": 17, "sy": 50, "sz": 594, "k": "door", "m": "melamine", "n": "R_ShakerRail", "g": "R"}, {"x": 1246, "y": 746, "z": -997, "sx": 17, "sy": 50, "sz": 594, "k": "door", "m": "melamine", "n": "R_ShakerRail", "g": "R"}, {"x": 1246, "y": 626, "z": -453, "sx": 17, "sy": 120, "sz": 50, "k": "door", "m": "melamine", "n": "R_ShakerStile", "g": "R"}, {"x": 1246, "y": 626, "z": -997, "sx": 17, "sy": 120, "sz": 50, "k": "door", "m": "melamine", "n": "R_ShakerStile", "g": "R"}, {"x": 1211, "y": 676.0, "z": -800.0, "sx": 35, "sy": 20, "sz": 200, "k": "fixture", "m": "steel", "n": "R_Pull", "g": "R"}, {"x": 1263, "y": 820, "z": -997, "sx": 17, "sy": 220, "sz": 594, "k": "door", "m": "melamine", "n": "R_DrawerFront", "g": "R"}, {"x": 1246, "y": 820, "z": -997, "sx": 17, "sy": 50, "sz": 594, "k": "door", "m": "melamine", "n": "R_ShakerRail", "g": "R"}, {"x": 1246, "y": 990, "z": -997, "sx": 17, "sy": 50, "sz": 594, "k": "door", "m": "melamine", "n": "R_ShakerRail", "g": "R"}, {"x": 1246, "y": 870, "z": -453, "sx": 17, "sy": 120, "sz": 50, "k": "door", "m": "melamine", "n": "R_ShakerStile", "g": "R"}, {"x": 1246, "y": 870, "z": -997, "sx": 17, "sy": 120, "sz": 50, "k": "door", "m": "melamine", "n": "R_ShakerStile", "g": "R"}, {"x": 1211, "y": 920.0, "z": -800.0, "sx": 35, "sy": 20, "sz": 200, "k": "fixture", "m": "steel", "n": "R_Pull", "g": "R"}, {"x": 1263, "y": 1064, "z": -997, "sx": 17, "sy": 220, "sz": 594, "k": "door", "m": "melamine", "n": "R_DrawerFront", "g": "R"}, {"x": 1246, "y": 1064, "z": -997, "sx": 17, "sy": 50, "sz": 594, "k": "door", "m": "melamine", "n": "R_ShakerRail", "g": "R"}, {"x": 1246, "y": 1234, "z": -997, "sx": 17, "sy": 50, "sz": 594, "k": "door", "m": "melamine", "n": "R_ShakerRail", "g": "R"}, {"x": 1246, "y": 1114, "z": -453, "sx": 17, "sy": 120, "sz": 50, "k": "door", "m": "melamine", "n": "R_ShakerStile", "g": "R"}, {"x": 1246, "y": 1114, "z": -997, "sx": 17, "sy": 120, "sz": 50, "k": "door", "m": "melamine", "n": "R_ShakerStile", "g": "R"}, {"x": 1211, "y": 1164.0, "z": -800.0, "sx": 35, "sy": 20, "sz": 200, "k": "fixture", "m": "steel", "n": "R_Pull", "g": "R"}, {"x": 1330, "y": 585, "z": -445.0, "sx": 320, "sy": 180, "sz": 15, "k": "", "m": "plywood_birch", "n": "R_BoxSide", "g": "R"}, {"x": 1330, "y": 585, "z": -970.0, "sx": 320, "sy": 180, "sz": 15, "k": "", "m": "plywood_birch", "n": "R_BoxSide", "g": "R"}, {"x": 1330, "y": 585, "z": -955.0, "sx": 15, "sy": 180, "sz": 510, "k": "", "m": "plywood_birch", "n": "R_BoxFB", "g": "R"}, {"x": 1635, "y": 585, "z": -955.0, "sx": 15, "sy": 180, "sz": 510, "k": "", "m": "plywood_birch", "n": "R_BoxFB", "g": "R"}, {"x": 1339, "y": 595, "z": -961.0, "sx": 302, "sy": 6, "sz": 522, "k": "", "m": "plywood_birch", "n": "R_BoxBottom", "g": "R"}, {"x": 1330, "y": 829, "z": -445.0, "sx": 320, "sy": 180, "sz": 15, "k": "", "m": "plywood_birch", "n": "R_BoxSide", "g": "R"}, {"x": 1330, "y": 829, "z": -970.0, "sx": 320, "sy": 180, "sz": 15, "k": "", "m": "plywood_birch", "n": "R_BoxSide", "g": "R"}, {"x": 1330, "y": 829, "z": -955.0, "sx": 15, "sy": 180, "sz": 510, "k": "", "m": "plywood_birch", "n": "R_BoxFB", "g": "R"}, {"x": 1635, "y": 829, "z": -955.0, "sx": 15, "sy": 180, "sz": 510, "k": "", "m": "plywood_birch", "n": "R_BoxFB", "g": "R"}, {"x": 1339, "y": 839, "z": -961.0, "sx": 302, "sy": 6, "sz": 522, "k": "", "m": "plywood_birch", "n": "R_BoxBottom", "g": "R"}, {"x": 1330, "y": 1073, "z": -445.0, "sx": 320, "sy": 180, "sz": 15, "k": "", "m": "plywood_birch", "n": "R_BoxSide", "g": "R"}, {"x": 1330, "y": 1073, "z": -970.0, "sx": 320, "sy": 180, "sz": 15, "k": "", "m": "plywood_birch", "n": "R_BoxSide", "g": "R"}, {"x": 1330, "y": 1073, "z": -955.0, "sx": 15, "sy": 180, "sz": 510, "k": "", "m": "plywood_birch", "n": "R_BoxFB", "g": "R"}, {"x": 1635, "y": 1073, "z": -955.0, "sx": 15, "sy": 180, "sz": 510, "k": "", "m": "plywood_birch", "n": "R_BoxFB", "g": "R"}, {"x": 1339, "y": 1083, "z": -961.0, "sx": 302, "sy": 6, "sz": 522, "k": "", "m": "plywood_birch", "n": "R_BoxBottom", "g": "R"}, {"x": 807, "y": 0, "z": -1600, "sx": 17, "sy": 2250, "sz": 600, "k": "", "m": "melamine", "n": "Divider", "g": "hang"}, {"x": 773, "y": 0, "z": -1600, "sx": 17, "sy": 120, "sz": 150, "k": "", "m": "melamine", "n": "DividerBlock", "g": "hang"}, {"x": 790, "y": 0, "z": -1600, "sx": 17, "sy": 120, "sz": 150, "k": "", "m": "melamine", "n": "DividerBlock", "g": "hang"}, {"x": 824, "y": 0, "z": -1600, "sx": 17, "sy": 120, "sz": 150, "k": "", "m": "melamine", "n": "DividerBlock", "g": "hang"}, {"x": 841, "y": 0, "z": -1600, "sx": 17, "sy": 120, "sz": 150, "k": "", "m": "melamine", "n": "DividerBlock", "g": "hang"}, {"x": 0, "y": 1839, "z": -1311, "sx": 807, "sy": 22, "sz": 22, "k": "rod", "m": "steel", "n": "Rod", "g": "hang"}, {"x": 824, "y": 1839, "z": -1311, "sx": 826, "sy": 22, "sz": 22, "k": "rod", "m": "steel", "n": "Rod", "g": "hang"}, {"x": 824, "y": 889, "z": -1311, "sx": 826, "sy": 22, "sz": 22, "k": "rod", "m": "steel", "n": "Rod", "g": "hang"}, {"x": 0, "y": 1700, "z": -130, "sx": 55, "sy": 55, "sz": 40, "k": "fixture", "m": "steel", "n": "Hook", "g": ""}, {"x": 0, "y": 1700, "z": -240, "sx": 55, "sy": 55, "sz": 40, "k": "fixture", "m": "steel", "n": "Hook", "g": ""}, {"x": 0, "y": 1700, "z": -350, "sx": 55, "sy": 55, "sz": 40, "k": "fixture", "m": "steel", "n": "Hook", "g": ""}, {"x": 0, "y": 1900, "z": -1600, "sx": 807, "sy": 17, "sz": 600, "k": "", "m": "melamine", "n": "Deck1_Back", "g": "deck"}, {"x": 824, "y": 1900, "z": -1600, "sx": 826, "sy": 17, "sz": 600, "k": "", "m": "melamine", "n": "Deck1_Back", "g": "deck"}, {"x": 0, "y": 1883, "z": -1560, "sx": 40, "sy": 17, "sz": 560, "k": "", "m": "melamine", "n": "Cleat_D1_SideL", "g": "deck"}, {"x": 1610, "y": 1883, "z": -1560, "sx": 40, "sy": 17, "sz": 560, "k": "", "m": "melamine", "n": "Cleat_D1_SideR", "g": "deck"}, {"x": 0, "y": 1883, "z": -1600, "sx": 807, "sy": 17, "sz": 40, "k": "", "m": "melamine", "n": "Cleat_D1_Back", "g": "deck"}, {"x": 824, "y": 1883, "z": -1600, "sx": 826, "sy": 17, "sz": 40, "k": "", "m": "melamine", "n": "Cleat_D1_Back", "g": "deck"}, {"x": 0, "y": 2250, "z": -1000, "sx": 370, "sy": 17, "sz": 600, "k": "", "m": "melamine", "n": "Deck2_LeftArm", "g": "deck"}, {"x": 1280, "y": 2250, "z": -1000, "sx": 370, "sy": 17, "sz": 600, "k": "", "m": "melamine", "n": "Deck2_RightArm", "g": "deck"}, {"x": 0, "y": 2250, "z": -1600, "sx": 1650, "sy": 17, "sz": 600, "k": "", "m": "melamine", "n": "Deck2_Back", "g": "deck"}, {"x": 0, "y": 2233, "z": -1560, "sx": 40, "sy": 17, "sz": 560, "k": "", "m": "melamine", "n": "Cleat_D2_SideL", "g": "deck"}, {"x": 1610, "y": 2233, "z": -1560, "sx": 40, "sy": 17, "sz": 560, "k": "", "m": "melamine", "n": "Cleat_D2_SideR", "g": "deck"}, {"x": 0, "y": 2233, "z": -1600, "sx": 807, "sy": 17, "sz": 40, "k": "", "m": "melamine", "n": "Cleat_D2_Back", "g": "deck"}, {"x": 824, "y": 2233, "z": -1600, "sx": 826, "sy": 17, "sz": 40, "k": "", "m": "melamine", "n": "Cleat_D2_Back", "g": "deck"}, {"x": 45, "y": 1884, "z": -1056, "sx": 762, "sy": 16, "sz": 16, "k": "fixture", "m": "steel", "n": "LED_Channel", "g": "deck"}, {"x": 824, "y": 1884, "z": -1056, "sx": 781, "sy": 16, "sz": 16, "k": "fixture", "m": "steel", "n": "LED_Channel", "g": "deck"}], "context": [{"t": "plane", "c": "#c3ae95", "p": [825.0, 0, -300.0], "w": 1950, "h": 2600, "rot": [-1.5707963, 0, 0]}, {"t": "plane", "c": "#e9e5dd", "p": [825.0, 2600, -300.0], "w": 1950, "h": 2600, "rot": [1.5707963, 0, 0]}, {"t": "plane", "c": "#e9e5dd", "p": [0.0, 1300.0, -800.0], "w": 1600.0, "h": 2600, "rot": [0, 1.5707963267948966, 0]}, {"t": "plane", "c": "#e9e5dd", "p": [0.0, 1300.0, 875.0], "w": 250.0, "h": 2600, "rot": [0, 1.5707963267948966, 0]}, {"t": "plane", "c": "#e9e5dd", "p": [1650.0, 1300.0, -1000.0], "w": 1200.0, "h": 2600, "rot": [0, 4.71238898038469, 0]}, {"t": "plane", "c": "#e9e5dd", "p": [1465.0, 1300.0, -400.0], "w": 370.0, "h": 2600, "rot": [0, 3.141592653589793, 0]}, {"t": "plane", "c": "#e9e5dd", "p": [825.0, 1300.0, -1600.0], "w": 1650.0, "h": 2600, "rot": [0, 0.0, 0]}, {"t": "plane", "c": "#e9e5dd", "p": [997.157287525381, 1300.0, -117.15728752538098], "w": 800.0, "h": 2600, "rot": [0, -2.356194490192345, 0]}, {"t": "plane", "c": "#e9e5dd", "p": [466.82720163547026, 2350.0, 413.17279836452974], "w": 700.0000000000002, "h": 500, "rot": [0, -2.356194490192345, 0]}, {"t": "door", "c": "#f2efe9", "hinge": [714.314575050762, 0, 165.68542494923804], "s": [700.0, 2100, 40], "ang": -1.3059999999999998}], "contents": [{"t": "tri", "c": "#b9a074", "y": 0, "h": 620, "v": [[10, 390], [370, 390], [10, 30]]}, {"t": "box", "c": "#5a4636", "g": "L", "p": [60, 18, -545], "s": [250, 72, 105]}, {"t": "box", "c": "#3d3229", "g": "L", "p": [60, 18, -685], "s": [250, 72, 105]}, {"t": "box", "c": "#6b5442", "g": "L", "p": [60, 18, -825], "s": [250, 72, 105]}, {"t": "box", "c": "#4a3b30", "g": "L", "p": [60, 18, -965], "s": [250, 72, 105]}, {"t": "box", "c": "#5a4636", "g": "L", "p": [60, 168, -545], "s": [250, 72, 105]}, {"t": "box", "c": "#3d3229", "g": "L", "p": [60, 168, -685], "s": [250, 72, 105]}, {"t": "box", "c": "#6b5442", "g": "L", "p": [60, 168, -825], "s": [250, 72, 105]}, {"t": "box", "c": "#4a3b30", "g": "L", "p": [60, 168, -965], "s": [250, 72, 105]}, {"t": "box", "c": "#5a4636", "g": "L", "p": [60, 303, -545], "s": [250, 72, 105]}, {"t": "box", "c": "#3d3229", "g": "L", "p": [60, 303, -685], "s": [250, 72, 105]}, {"t": "box", "c": "#6b5442", "g": "L", "p": [60, 303, -825], "s": [250, 72, 105]}, {"t": "box", "c": "#5a4636", "g": "R", "p": [1340, 18, -545], "s": [250, 72, 105]}, {"t": "box", "c": "#3d3229", "g": "R", "p": [1340, 18, -685], "s": [250, 72, 105]}, {"t": "box", "c": "#6b5442", "g": "R", "p": [1340, 18, -825], "s": [250, 72, 105]}, {"t": "box", "c": "#4a3b30", "g": "R", "p": [1340, 18, -965], "s": [250, 72, 105]}, {"t": "box", "c": "#5a4636", "g": "R", "p": [1340, 168, -545], "s": [250, 72, 105]}, {"t": "box", "c": "#3d3229", "g": "R", "p": [1340, 168, -685], "s": [250, 72, 105]}, {"t": "box", "c": "#6b5442", "g": "R", "p": [1340, 168, -825], "s": [250, 72, 105]}, {"t": "box", "c": "#4a3b30", "g": "R", "p": [1340, 168, -965], "s": [250, 72, 105]}, {"t": "box", "c": "#5a4636", "g": "R", "p": [1340, 303, -545], "s": [250, 72, 105]}, {"t": "box", "c": "#3d3229", "g": "R", "p": [1340, 303, -685], "s": [250, 72, 105]}, {"t": "box", "c": "#6b5442", "g": "R", "p": [1340, 303, -825], "s": [250, 72, 105]}, {"t": "box", "c": "#5a4636", "p": [80, 0, -1195], "s": [300, 430, 135]}, {"t": "box", "c": "#3d3229", "p": [290, 0, -1195], "s": [300, 430, 135]}, {"t": "box", "c": "#6b5442", "p": [500, 0, -1195], "s": [300, 430, 135]}, {"t": "cyl", "c": "#c9bda8", "g": "deck", "p": [270, 2267, -1270], "r": 150, "h": 175}, {"t": "cyl", "c": "#ded5c4", "g": "deck", "p": [620, 2267, -1270], "r": 150, "h": 175}, {"t": "cyl", "c": "#c9bda8", "g": "deck", "p": [1130, 2267, -1270], "r": 150, "h": 175}, {"t": "cyl", "c": "#ded5c4", "g": "deck", "p": [1510, 2267, -1270], "r": 150, "h": 175}, {"t": "box", "c": "#cfc4b0", "g": "deck", "p": [60, 1917, -1460], "s": [300, 250, 340]}, {"t": "box", "c": "#cfc4b0", "g": "deck", "p": [1310, 1917, -1460], "s": [300, 250, 340]}, {"t": "box", "c": "#8a94a6", "g": "hang", "p": [40, 520, -1515.0], "s": [54, 1330, 430]}, {"t": "box", "c": "#6f7b8c", "g": "hang", "p": [103, 670, -1515.0], "s": [54, 1180, 430]}, {"t": "box", "c": "#b8b0a2", "g": "hang", "p": [166, 560, -1515.0], "s": [54, 1290, 430]}, {"t": "box", "c": "#5f6b63", "g": "hang", "p": [229, 870, -1515.0], "s": [54, 980, 430]}, {"t": "box", "c": "#a89a8c", "g": "hang", "p": [292, 610, -1515.0], "s": [54, 1240, 430]}, {"t": "box", "c": "#7d8a94", "g": "hang", "p": [355, 730, -1515.0], "s": [54, 1120, 430]}, {"t": "box", "c": "#9aa6b2", "g": "hang", "p": [418, 520, -1515.0], "s": [54, 1330, 430]}, {"t": "box", "c": "#6b6560", "g": "hang", "p": [481, 670, -1515.0], "s": [54, 1180, 430]}, {"t": "box", "c": "#c2b8a8", "g": "hang", "p": [544, 560, -1515.0], "s": [54, 1290, 430]}, {"t": "box", "c": "#77837a", "g": "hang", "p": [607, 870, -1515.0], "s": [54, 980, 430]}, {"t": "box", "c": "#8a94a6", "g": "hang", "p": [670, 610, -1515.0], "s": [54, 1240, 430]}, {"t": "box", "c": "#8a94a6", "g": "hang", "p": [847, 1080, -1500.0], "s": [54, 770, 400]}, {"t": "box", "c": "#6f7b8c", "g": "hang", "p": [910, 1050, -1500.0], "s": [54, 800, 400]}, {"t": "box", "c": "#b8b0a2", "g": "hang", "p": [973, 1110, -1500.0], "s": [54, 740, 400]}, {"t": "box", "c": "#5f6b63", "g": "hang", "p": [1036, 1040, -1500.0], "s": [54, 810, 400]}, {"t": "box", "c": "#a89a8c", "g": "hang", "p": [1099, 1090, -1500.0], "s": [54, 760, 400]}, {"t": "box", "c": "#7d8a94", "g": "hang", "p": [1162, 1080, -1500.0], "s": [54, 770, 400]}, {"t": "box", "c": "#9aa6b2", "g": "hang", "p": [1225, 1050, -1500.0], "s": [54, 800, 400]}, {"t": "box", "c": "#6b6560", "g": "hang", "p": [1288, 1110, -1500.0], "s": [54, 740, 400]}, {"t": "box", "c": "#c2b8a8", "g": "hang", "p": [1351, 1040, -1500.0], "s": [54, 810, 400]}, {"t": "box", "c": "#77837a", "g": "hang", "p": [1414, 1090, -1500.0], "s": [54, 760, 400]}, {"t": "box", "c": "#8a94a6", "g": "hang", "p": [1477, 1080, -1500.0], "s": [54, 770, 400]}, {"t": "box", "c": "#6f7b8c", "g": "hang", "p": [1540, 1050, -1500.0], "s": [54, 800, 400]}, {"t": "box", "c": "#8a94a6", "g": "hang", "p": [847, 110, -1490.0], "s": [54, 790, 380]}, {"t": "box", "c": "#6f7b8c", "g": "hang", "p": [910, 140, -1490.0], "s": [54, 760, 380]}, {"t": "box", "c": "#b8b0a2", "g": "hang", "p": [973, 100, -1490.0], "s": [54, 800, 380]}, {"t": "box", "c": "#5f6b63", "g": "hang", "p": [1036, 155, -1490.0], "s": [54, 745, 380]}, {"t": "box", "c": "#a89a8c", "g": "hang", "p": [1099, 110, -1490.0], "s": [54, 790, 380]}, {"t": "box", "c": "#7d8a94", "g": "hang", "p": [1162, 140, -1490.0], "s": [54, 760, 380]}, {"t": "box", "c": "#9aa6b2", "g": "hang", "p": [1225, 100, -1490.0], "s": [54, 800, 380]}, {"t": "box", "c": "#6b6560", "g": "hang", "p": [1288, 155, -1490.0], "s": [54, 745, 380]}, {"t": "box", "c": "#c2b8a8", "g": "hang", "p": [1351, 110, -1490.0], "s": [54, 790, 380]}, {"t": "box", "c": "#77837a", "g": "hang", "p": [1414, 140, -1490.0], "s": [54, 760, 380]}, {"t": "box", "c": "#8a94a6", "g": "hang", "p": [1477, 100, -1490.0], "s": [54, 800, 380]}, {"t": "box", "c": "#6f7b8c", "g": "hang", "p": [1540, 155, -1490.0], "s": [54, 745, 380]}], "colors": {"melamine": "#f2f0ec", "mdf": "#ece8e1", "plywood_birch": "#d9c7a3", "hardboard": "#b3a086", "steel": "#9aa0a6", "brass": "#b8935a", "fixture": "#4a4a50", "wall": "#e9e5dd", "floor": "#c3ae95", "door": "#f2efe9"}, "W": 1650, "H": 2600, "D": 1600}, T=THREE;
+const scene=new T.Scene(); scene.background=new T.Color(0xefece6);
+const renderer=new T.WebGLRenderer({antialias:true});
+renderer.shadowMap.enabled=true; renderer.shadowMap.type=T.PCFSoftShadowMap;
+document.body.appendChild(renderer.domElement);
+const camera=new T.PerspectiveCamera(42,1,10,40000);
+
+const cache={};
+function mat(key){
+  if(!cache[key]){
+    const c=new T.Color(D.colors[key]||key);
+    cache[key]=(key==='steel'||key==='brass')
+      ? new T.MeshStandardMaterial({color:c,roughness:(key==='brass')?.28:.35,metalness:.9})
+      : new T.MeshStandardMaterial({color:c,roughness:.8,metalness:0});
+  }
+  return cache[key];
+}
+/* objects tagged by group, so any part of the piece can be hidden to see past it */
+const GROUPS={L:'towL',R:'towR',deck:'deck',hang:'hang'};
+const tagged={}; Object.keys(GROUPS).forEach(g=>tagged[g]=[]);
+function reg(o,tag){ if(tag && tagged[tag]) tagged[tag].push(o); }
+
+function box(par,x,y,z,sx,sy,sz,m,edges,tag){
+  const g=new T.Mesh(new T.BoxGeometry(sx,sy,sz),m);
+  g.position.set(x+sx/2,y+sy/2,z+sz/2);
+  g.castShadow=true; g.receiveShadow=true; par.add(g); reg(g,tag);
+  if(edges){
+    const e=new T.LineSegments(new T.EdgesGeometry(g.geometry),
+      new T.LineBasicMaterial({color:0x8d7f6b,transparent:true,opacity:.45}));
+    e.position.copy(g.position); par.add(e); reg(e,tag);
+  }
+  return g;
+}
+
+/* ---- the closet itself (from the spec) ---- */
+const piece=new T.Group(); scene.add(piece);
+D.parts.forEach(p=>{
+  if(p.k==='rod'){
+    const g=new T.Mesh(new T.CylinderGeometry(p.sy/2,p.sy/2,p.sx,20),mat('steel'));
+    g.rotation.z=Math.PI/2;
+    g.position.set(p.x+p.sx/2,p.y+p.sy/2,p.z+p.sz/2);
+    g.castShadow=true; piece.add(g); reg(g,p.g); return;
+  }
+  if(p.n==='L_Bracket'){
+    /* draw the real L, not its clearance envelope: horizontal arm + wall leg */
+    const fm=mat('fixture');
+    box(piece,p.x,p.y+p.sy-30,p.z,p.sx,30,p.sz,fm,false,p.g);
+    box(piece,p.x,p.y,p.z,30,p.sy,p.sz,fm,false,p.g);
+    return;
+  }
+  const isPull=p.n.endsWith('_Pull');
+  const m=isPull?mat('brass'):mat(p.k==='fixture'?'fixture':p.m);
+  box(piece,p.x,p.y,p.z,p.sx,p.sy,p.sz,m,!isPull,p.g);
+});
+
+/* ---- context: room shell + bathroom door ---- */
+const ctx=new T.Group(); scene.add(ctx);
+D.context.forEach(o=>{
+  if(o.t==='plane'){
+    const m=new T.Mesh(new T.PlaneGeometry(o.w,o.h),
+      new T.MeshStandardMaterial({color:new T.Color(o.c),roughness:.95,
+                                  metalness:0,side:T.FrontSide}));
+    m.position.set(o.p[0],o.p[1],o.p[2]);
+    m.rotation.set(o.rot[0],o.rot[1],o.rot[2]);
+    m.receiveShadow=true; ctx.add(m); return;
+  }
+  if(o.t==='door'){
+    const grp=new T.Group();
+    grp.position.set(o.hinge[0],o.hinge[1],o.hinge[2]);
+    grp.rotation.y=o.ang;
+    const m=new T.Mesh(new T.BoxGeometry(o.s[0],o.s[1],o.s[2]),mat(o.c));
+    m.position.set(o.s[0]/2,o.s[1]/2,0); m.castShadow=true; grp.add(m);
+    ctx.add(grp); return;
+  }
+  box(ctx,o.p[0],o.p[1],o.p[2],o.s[0],o.s[1],o.s[2],mat(o.c),false);
+});
+
+/* ---- contents: props ---- */
+const cnt=new T.Group(); scene.add(cnt);
+D.contents.forEach(o=>{
+  if(o.t==='box'){ box(cnt,o.p[0],o.p[1],o.p[2],o.s[0],o.s[1],o.s[2],mat(o.c),false,o.g); return; }
+  if(o.t==='tri'){
+    /* right-angled corner basket: plan polygon extruded upward. Shape (a,b)
+       maps to world (a, ., -b) after the -90deg X rotation, and b is the spec
+       z, so the polygon lands in the flipped scene frame automatically. */
+    const s=new T.Shape();
+    s.moveTo(o.v[0][0],o.v[0][1]);
+    for(let i=1;i<o.v.length;i++) s.lineTo(o.v[i][0],o.v[i][1]);
+    s.closePath();
+    const g=new T.Mesh(new T.ExtrudeGeometry(s,{depth:o.h,bevelEnabled:false}),mat(o.c));
+    g.rotation.x=-Math.PI/2;
+    g.position.set(0,o.y,0);
+    g.castShadow=true; g.receiveShadow=true; cnt.add(g); return;
+  }
+  const g=new T.Mesh(new T.CylinderGeometry(o.r,o.r*.98,o.h,24),mat(o.c));
+  g.position.set(o.p[0],o.p[1]+o.h/2,o.p[2]);
+  g.castShadow=true; g.receiveShadow=true; cnt.add(g);
+});
+
+/* Tower visibility is set per-object; the ctx/cnt groups gate their own
+   children, so a tower shoe stays governed by BOTH its tower and Contents. */
+function applyVis(){
+  ctx.visible=document.getElementById('ctx').checked;
+  cnt.visible=document.getElementById('cnt').checked;
+  for(const g in GROUPS){
+    const on=document.getElementById(GROUPS[g]).checked;
+    tagged[g].forEach(o=>o.visible=on);
+  }
+}
+['ctx','cnt',...Object.values(GROUPS)].forEach(id=>
+  document.getElementById(id).addEventListener('change',applyVis));
+applyVis();
+
+/* Board finish: every melamine part (carcass, shelves, decks, drawer fronts and
+   their shaker trim) shares one cached material, so recolouring it re-finishes
+   the whole unit at once. Ply/hardboard drawer boxes and the rods are separate
+   materials and deliberately do NOT follow. */
+const sw=document.getElementById('sw');
+const swBtns=[...sw.querySelectorAll('button')];
+function pickFinish(btn){
+  swBtns.forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  mat('melamine').color.set(btn.dataset.c);
+}
+swBtns.forEach(btn=>{ btn.style.background=btn.dataset.c;
+                      btn.onclick=()=>pickFinish(btn); });
+/* ?finish=sage | 1 | light  — so a finish can be linked to or screenshotted */
+(()=>{ const q=new URLSearchParams(location.search).get('finish');
+  if(!q) return;
+  const i=parseInt(q,10);
+  const hit=Number.isInteger(i)&&swBtns[i] ? swBtns[i]
+    : swBtns.find(b=>b.title.toLowerCase().includes(q.toLowerCase()));
+  if(hit) pickFinish(hit);
+})();
+
+/* ---- lighting ---- */
+scene.add(new T.HemisphereLight(0xffffff,0xb9ad9a,.72));
+const key=new T.DirectionalLight(0xfff4e2,.95);
+key.position.set(-1800,3600,2600); key.castShadow=true;
+key.shadow.mapSize.set(2048,2048);
+const s=key.shadow.camera; s.left=-3000; s.right=3000; s.top=3600; s.bottom=-600;
+s.near=100; s.far=12000; scene.add(key);
+const fill=new T.DirectionalLight(0xdfe8ff,.3); fill.position.set(2600,1800,1800);
+scene.add(fill);
+
+/* ---- manual orbit (r128 ships no OrbitControls) ---- */
+const tgt=new T.Vector3(D.W/2,D.H*0.45,-D.D*0.5);
+const AZ0=1.15;   /* three-quarter view in through the open front */
+let az=AZ0, pol=1.22, rad=4700, drag=false, px=0, py=0, idle=true, phase=0;
+
+/* Fixed view presets — declared AFTER az/pol/rad exist. The scene lies along
+   -Z with the open front at +Z, so az=PI/2 looks straight in, az=0 faces the
+   left wall and az=PI the right. */
+const VIEWS={iso:[AZ0,1.22,4700], front:[Math.PI/2,1.50,4300],
+             left:[0.02,1.50,4300], right:[Math.PI-0.02,1.50,4300],
+             top:[Math.PI/2,0.12,4600]};
+document.querySelectorAll('#vw button').forEach(b=>{
+  b.onclick=()=>{ const v=VIEWS[b.dataset.v];
+    az=v[0]; pol=v[1]; rad=v[2]; idle=false; };
+});
+const cv=renderer.domElement;
+cv.addEventListener('pointerdown',e=>{drag=true;idle=false;px=e.clientX;py=e.clientY;
+  cv.setPointerCapture(e.pointerId);});
+cv.addEventListener('pointerup',()=>drag=false);
+cv.addEventListener('pointermove',e=>{if(!drag)return;
+  az-=(e.clientX-px)*0.007;
+  pol=Math.max(0.30,Math.min(1.50,pol-(e.clientY-py)*0.005));
+  px=e.clientX; py=e.clientY;});
+cv.addEventListener('wheel',e=>{rad=Math.max(900,Math.min(9000,rad+e.deltaY*1.7));
+  e.preventDefault();},{passive:false});
+function resize(){const w=innerWidth,h=innerHeight;
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  renderer.setSize(w,h); camera.aspect=w/h; camera.updateProjectionMatrix();}
+addEventListener('resize',resize); resize();
+(function loop(){
+  requestAnimationFrame(loop);
+  /* idle: gentle oscillation around the hero angle, not an unbounded spin —
+     an unbounded spin drifts the opening view away within seconds */
+  if(idle){ phase+=0.0035; az=AZ0+Math.sin(phase)*0.30; }
+  camera.position.set(
+    tgt.x+rad*Math.sin(pol)*Math.cos(az),
+    tgt.y+rad*Math.cos(pol),
+    tgt.z+rad*Math.sin(pol)*Math.sin(az));
+  camera.lookAt(tgt);
+  renderer.render(scene,camera);
+})();
+</script></body></html>

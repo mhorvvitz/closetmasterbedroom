@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+output/supplier_rows.json
+output/render_check.png
+
+# Excluded from the public repo (user decision, 2026-08-19):
+# the architect's floor plan of a private residence.
+Screenshots/*.pdf
+Screenshots/Screenshot 2026-08-15 213613.png
+output_mdf/
+reference/

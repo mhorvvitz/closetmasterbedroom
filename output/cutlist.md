@@ -1,0 +1,51 @@
+# Cut list — Master Bedroom Walk-In Closet
+
+Units: mm
+
+| Part | Qty | Length | Width | Thk | Material | Grain | Banding | Notes |
+|---|---:|---:|---:|---:|---|---|---|---|
+| L_Side | 2 | 2250 | 370 | 17 | melamine 17mm / סיבית מלמין | length | front | grain vertical; System-32 line 37mm from the wall face |
+| L_Bottom | 1 | 566 | 370 | 17 | melamine 17mm / סיבית מלמין | length | front | fixed — cam-and-dowel |
+| L_ShoeShelf | 3 | 566 | 370 | 17 | melamine 17mm / סיבית מלמין | length | front | shoe shelf |
+| L_Shelf | 6 | 566 | 370 | 17 | melamine 17mm / סיבית מלמין | length | front | fixed — carries a drawer bay |
+| L_DrawerFront | 3 | 594 | 220 | 17 | melamine 17mm / סיבית מלמין | length | all | SHAKER — 17mm coloured melamine base + applied 17mm frame; banded all four edges |
+| L_ShakerRail | 6 | 594 | 50 | 17 | melamine 17mm / סיבית מלמין | length | all | applied trim, cut from offcuts of the same board |
+| L_ShakerStile | 6 | 120 | 50 | 17 | melamine 17mm / סיבית מלמין | length | long | applied trim, cut from offcuts of the same board |
+| L_BoxSide | 6 | 320 | 180 | 15 | plywood_birch 15mm / דיקט בירץ׳ | none |  |  |
+| L_BoxFB | 6 | 510 | 180 | 15 | plywood_birch 15mm / דיקט בירץ׳ | none |  |  |
+| L_BoxBottom | 3 | 522 | 302 | 6 | plywood_birch 6mm / דיקט בירץ׳ | none |  | sits in a 6mm groove, 10mm up from the bottom edge |
+| R_Side | 2 | 2250 | 370 | 17 | melamine 17mm / סיבית מלמין | length | front | grain vertical; System-32 line 37mm from the wall face |
+| R_Bottom | 1 | 566 | 370 | 17 | melamine 17mm / סיבית מלמין | length | front | fixed — cam-and-dowel |
+| R_ShoeShelf | 3 | 566 | 370 | 17 | melamine 17mm / סיבית מלמין | length | front | shoe shelf |
+| R_Shelf | 6 | 566 | 370 | 17 | melamine 17mm / סיבית מלמין | length | front | fixed — carries a drawer bay |
+| R_DrawerFront | 3 | 594 | 220 | 17 | melamine 17mm / סיבית מלמין | length | all | SHAKER — 17mm coloured melamine base + applied 17mm frame; banded all four edges |
+| R_ShakerRail | 6 | 594 | 50 | 17 | melamine 17mm / סיבית מלמין | length | all | applied trim, cut from offcuts of the same board |
+| R_ShakerStile | 6 | 120 | 50 | 17 | melamine 17mm / סיבית מלמין | length | long | applied trim, cut from offcuts of the same board |
+| R_BoxSide | 6 | 320 | 180 | 15 | plywood_birch 15mm / דיקט בירץ׳ | none |  |  |
+| R_BoxFB | 6 | 510 | 180 | 15 | plywood_birch 15mm / דיקט בירץ׳ | none |  |  |
+| R_BoxBottom | 3 | 522 | 302 | 6 | plywood_birch 6mm / דיקט בירץ׳ | none |  | sits in a 6mm groove, 10mm up from the bottom edge |
+| Divider | 1 | 2250 | 600 | 17 | melamine 17mm / סיבית מלמין | length | front | grain vertical; front edge banded — it is the most visible single edge in the room |
+| DividerBlock | 4 | 150 | 120 | 17 | melamine 17mm / סיבית מלמין | length |  | glue in pairs -> 2 blocks of 34; screw to the BACK WALL (2 fixings each) and to the divider face with 4x40 — no floor fixing, tiles |
+| Deck1_Back_A | 1 | 807 | 600 | 17 | melamine 17mm / סיבית מלמין | length | front | 600 deep, free front edge over 807/826mm span. LOAD LIMIT ~15kg per panel sustained (approx 3-4 boxes of folded clothes). 17mm board is ~3x less stiff than the 25mm this was originally drawn at, and the rail that would have stiffened it was deliberately omitted — see docs/spec.md 10b. |
+| Deck1_Back_B | 1 | 826 | 600 | 17 | melamine 17mm / סיבית מלמין | length | front | 600 deep, free front edge over 807/826mm span. LOAD LIMIT ~15kg per panel sustained (approx 3-4 boxes of folded clothes). 17mm board is ~3x less stiff than the 25mm this was originally drawn at, and the rail that would have stiffened it was deliberately omitted — see docs/spec.md 10b. |
+| Cleat_D1_SideL | 1 | 560 | 40 | 17 | melamine 17mm / סיבית מלמין | length |  |  |
+| Cleat_D1_SideR | 1 | 560 | 40 | 17 | melamine 17mm / סיבית מלמין | length |  |  |
+| Cleat_D1_Back_A | 1 | 807 | 40 | 17 | melamine 17mm / סיבית מלמין | length |  |  |
+| Cleat_D1_Back_B | 1 | 826 | 40 | 17 | melamine 17mm / סיבית מלמין | length |  |  |
+| Deck2_LeftArm | 1 | 600 | 370 | 17 | melamine 17mm / סיבית מלמין | length | front, w1 | stops at the tower — no overhang over the entry |
+| Deck2_RightArm | 1 | 600 | 370 | 17 | melamine 17mm / סיבית מלמין | length | front, w1 |  |
+| Deck2_Back | 1 | 1650 | 600 | 17 | melamine 17mm / סיבית מלמין | length | front | 600 deep, free front edge over 807/826mm span. LOAD LIMIT ~15kg per panel sustained (approx 3-4 boxes of folded clothes). 17mm board is ~3x less stiff than the 25mm this was originally drawn at, and the rail that would have stiffened it was deliberately omitted — see docs/spec.md 10b. Top deck — seasonal storage only. |
+| Cleat_D2_SideL | 1 | 560 | 40 | 17 | melamine 17mm / סיבית מלמין | length |  |  |
+| Cleat_D2_SideR | 1 | 560 | 40 | 17 | melamine 17mm / סיבית מלמין | length |  |  |
+| Cleat_D2_Back_A | 1 | 807 | 40 | 17 | melamine 17mm / סיבית מלמין | length |  |  |
+| Cleat_D2_Back_B | 1 | 826 | 40 | 17 | melamine 17mm / סיבית מלמין | length |  |  |
+
+## Material summary
+
+| Material | Parts | Area (m²) | Banding (m) | Sheets (est.) |
+|---|---:|---:|---:|---:|
+| melamine 17mm / סיבית מלמין | 72 | 12.787 | 55.9 | 6 |
+| plywood_birch 15mm / דיקט בירץ׳ | 24 | 1.793 | 0.0 | 1 |
+| plywood_birch 6mm / דיקט בירץ׳ | 6 | 0.946 | 0.0 | 1 |
+
+> Sheet count is a heuristic estimate, not an optimised cut plan. For production nesting use OpenCutList or CutList Optimizer.

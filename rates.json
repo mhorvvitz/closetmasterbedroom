@@ -1,0 +1,138 @@
+{
+  "_note": "AUTHORED price source for costing.py. Every number here is an ASSUMED market rate for the Israeli market and MUST be replaced with real supplier quotes before this is used to commit money. Ranges are low/high for the same item, not good/bad quality. Materials and hardware only — carpenter labour, delivery and installation are NOT included.",
+  "_verify": "Board price is a real supplier quote (280/sheet incl. cutting). Banding, hardware and the ply lines are still ASSUMED.",
+  "currency": "ILS",
+  "vat_pct": 18,
+  "vat_note": "Israeli VAT as assumed at time of writing — confirm the current rate.",
+  "sheets": {
+    "plywood_birch_15": {
+      "desc": "15mm birch plywood (drawer boxes)",
+      "sheet_mm": [
+        2440,
+        1220
+      ],
+      "low": 260,
+      "high": 380
+    },
+    "plywood_birch_6": {
+      "desc": "6mm birch plywood (grooved drawer bottoms)",
+      "sheet_mm": [
+        2440,
+        1220
+      ],
+      "low": 120,
+      "high": 200
+    },
+    "melamine_17": {
+      "desc": "17mm coloured melamine, 2440x1220 — SUPPLIER QUOTED, incl. cutting",
+      "sheet_mm": [
+        2440,
+        1220
+      ],
+      "low": 280,
+      "high": 280,
+      "_source": "supplier quote 2026-08-16: 280 ILS incl. cutting"
+    }
+  },
+  "banding_per_m": {
+    "desc": "ABS edge banding, decor-matched, applied",
+    "low": 4.0,
+    "high": 8.0
+  },
+  "hardware": [
+    {
+      "item": "Confirmat screw 7x50 + cap",
+      "qty": 59,
+      "low": 0.5,
+      "high": 1.0
+    },
+    {
+      "item": "Wood glue PVA D3, 750ml",
+      "qty": 1,
+      "low": 35,
+      "high": 60
+    },
+    {
+      "item": "23ga pins, 30mm (drawer boxes)",
+      "qty": 1,
+      "low": 15,
+      "high": 30
+    },
+    {
+      "item": "Drawer runner pair, 300mm soft-close",
+      "qty": 6,
+      "low": 45,
+      "high": 95
+    },
+    {
+      "item": "Bar pull, 160mm centres, BRASS/GOLD finish",
+      "qty": 6,
+      "low": 35,
+      "high": 110
+    },
+    {
+      "item": "Hanging rod (807 / 825 / 825)",
+      "qty": 3,
+      "low": 35,
+      "high": 70
+    },
+    {
+      "item": "Rod end socket",
+      "qty": 6,
+      "low": 8,
+      "high": 20
+    },
+    {
+      "item": "Rod centre support bracket",
+      "qty": 3,
+      "low": 15,
+      "high": 35
+    },
+    {
+      "item": "Shelf pin 5mm",
+      "qty": 8,
+      "low": 1.0,
+      "high": 2.0
+    },
+    {
+      "item": "Heavy-duty shelf L-bracket, 350mm arm",
+      "qty": 4,
+      "low": 35,
+      "high": 80
+    },
+    {
+      "item": "Wall fixing (plug + screw)",
+      "qty": 45,
+      "low": 1.0,
+      "high": 2.5
+    },
+    {
+      "item": "LED aluminium channel + diffuser (per m)",
+      "qty": 2.1,
+      "low": 25,
+      "high": 50
+    },
+    {
+      "item": "LED strip, warm white CRI>=90 (per m)",
+      "qty": 2.1,
+      "low": 40,
+      "high": 90
+    },
+    {
+      "item": "LED driver 24V",
+      "qty": 1,
+      "low": 90,
+      "high": 180
+    },
+    {
+      "item": "PIR / door switch",
+      "qty": 1,
+      "low": 60,
+      "high": 150
+    }
+  ],
+  "waste_pct": {
+    "desc": "extra sheets/banding to allow for offcuts and mistakes",
+    "value": 10
+  }
+}
