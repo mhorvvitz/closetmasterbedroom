@@ -37,8 +37,8 @@
   "banding_per_m": {
     "desc": "ABS edge banding, decor-matched, applied",
     "low": 8.0,
-    "high": 8.87,
-    "_source": "Alfandari quote 2026-08-20 No 51/040609 line 2: 62 units x 8.00 = 496 ILS, applied. Unit ambiguous: 8.00/m if per metre (55.9 m + 10% waste = 62), 8.87/m equivalent if the 62 counts the 60 banded parts. Confirm and collapse."
+    "high": 8.0,
+    "_source": "Alfandari quote 2026-08-20 No 51/040609 line 2: 62 m x 8.00 = 496 ILS, applied. Priced per metre: 62 is the cut list's 55.9 m plus the 10% waste allowance (61.5). Not a part count — no count in the cut list lands on 62 (72 melamine parts, 60 with a banding instruction, 36 of those excluding the shaker trim, 116 banded edges)."
   },
   "hardware": [
     {
@@ -157,10 +157,10 @@
         {
           "desc": "הדבקת קנט תואם(א) — applying matched edge banding",
           "qty": 62,
-          "unit": "m or part — confirm",
+          "unit": "m",
           "price": 8.0,
           "total": 496.0,
-          "_note": "Adopted as banding_per_m."
+          "_note": "Adopted as banding_per_m: 8.00/m applied, matched decor."
         }
       ],
       "excludes": [

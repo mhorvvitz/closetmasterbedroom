@@ -67,23 +67,25 @@ Not covered — all still unpriced or on assumed rates:
 | Item | `rates.json` before | This quote | Effect |
 |---|---|---|---|
 | Board, per 2440×1220 sheet | ₪280 (17 mm coloured, incl. cutting) | ₪225 (12 mm French white, incl. cutting) | **different board — see below** |
-| Applied edge banding, per m | ₪4.00–8.00 assumed | ₪8.00 (or ₪8.87/m — see unit note) | now **quoted**, at the top of the assumed range |
+| Applied edge banding, per m | ₪4.00–8.00 assumed | ₪8.00/m | now **quoted**, at the top of the assumed range |
 | VAT | 18% assumed | 18% | confirmed |
 
-**Unit note on line 2.** The quote says 62 units at ₪8. Two readings fit the
-job almost equally well, and the line total is the same either way:
+**Unit note on line 2.** The 62 is **metres**, not a count of parts. The cut
+list needs **55.9 m** of banding; the 10% waste allowance puts it at 61.5, which
+is the 62 quoted. No part count in the job lands anywhere near it:
 
-- **per metre** — the cut list needs **55.9 m** of banding; +10% waste = 61.5,
-  which rounds to the 62 quoted. Rate ₪8.00/m.
-- **per banded part** — the cut list has **60** melamine parts carrying banding.
-  Rate would then be ₪496 ÷ 55.9 m = ₪8.87/m equivalent.
+| Count | Value |
+|---|---:|
+| Melamine parts | 72 |
+| Parts carrying a banding instruction | 60 |
+| …excluding the 24 shaker trim pieces | 36 |
+| Banded edges (each part's edges, counted separately) | 116 |
+| **Metres of banding** | **55.9** (61.5 with waste) |
 
-`costing.py` prices the bare 55.9 m and adds its own 10% waste allowance, so
-the quoted 62 and the estimate's 61.5 land in the same place — the allowance is
-not double-counted in any material way.
+`costing.py` prices the bare 55.9 m and adds its own 10% waste allowance, so it
+and the quote arrive at the same quantity by the same route.
 
-`rates.json` carries this as a **₪8.00–8.87/m** range so the ambiguity is priced
-rather than guessed away. Confirm the unit with the supplier and collapse it.
+`rates.json` therefore carries applied banding at a flat **₪8.00/m**, quoted.
 
 ## ⚠️ The board line is not the board this design is built from
 
@@ -115,7 +117,7 @@ thinner white board costs, not as a price for this job.
 
 1. Price **17 mm coloured** melamine, same sheet size, cutting included on the
    same basis as this quote.
-2. Confirm the banding line unit — per metre or per part.
-3. Confirm the 62 against our **55.9 m** requirement (`output/cutlist.json`).
-4. Confirm the sheet size behind "טפ 244" — the cut list assumes 2440 × 1220.
-5. Quote validity: today only. Anything ordered later needs re-quoting.
+2. Confirm the 62 m against our **55.9 m** requirement (`output/cutlist.json`) —
+   the difference is the waste allowance, so an order should not need more.
+3. Confirm the sheet size behind "טפ 244" — the cut list assumes 2440 × 1220.
+4. Quote validity: today only. Anything ordered later needs re-quoting.

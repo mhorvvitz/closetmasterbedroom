@@ -222,9 +222,10 @@ Diagonal geometry, from the step corner (X 1280, Z 400) at 45°:
 8a. ~~Is cutting included in the board price?~~ — **CLOSED (2026-08-20, user)**.
    It is, on both quotes, even though the 2026-08-20 sheet shows no separate
    cutting line. Sheet prices are cut-to-list prices.
-8b. **Edge-banding unit**: the quote reads 62 × ₪8. That is either ₪8.00/m
-   (55.9 m + waste) or ₪8/part (60 banded parts). Confirm and collapse the
-   ₪8.00–8.87/m range in `rates.json`.
+8b. ~~Edge-banding unit~~ — **CLOSED (2026-08-20, user)**. The quote's 62 × ₪8
+   is **per metre**: 55.9 m plus the 10% waste allowance. It is not a part
+   count — no count in the job lands on 62 (72 melamine parts, 60 carrying a
+   banding instruction, 36 without the shaker trim, 116 banded edges).
 9. **Wall substrate** for the cleats and wall fixings — concrete/block vs
    plasterboard needs entirely different anchors.
 10. **Floor level.** If out of level, the towers need levelling feet or a

@@ -27,7 +27,7 @@ firm sheet count — it can move this line by a whole sheet either way.
 
 | Item | Metres | ILS low | ILS high | Price source |
 |---|---:|---:|---:|---|
-| ABS edge banding, decor-matched, applied | 55.9 | 447 | 496 | **quoted** |
+| ABS edge banding, decor-matched, applied | 55.9 | 447 | 447 | **quoted** |
 
 ## Hardware
 
@@ -65,15 +65,15 @@ quote excludes and how long it stays valid.
 | | ILS low | ILS high |
 |---|---:|---:|
 | Boards | 2,060 | 2,260 |
-| Edge banding | 447 | 496 |
+| Edge banding | 447 | 447 |
 | Hardware | 1,237 | 2,886 |
-| Subtotal | 3,744 | 5,642 |
-| Waste allowance 10% | 374 | 564 |
-| **Net** | **4,119** | **6,207** |
-| VAT 18% | 741 | 1,117 |
-| **TOTAL inc. VAT** | **4,860** | **7,324** |
+| Subtotal | 3,744 | 5,594 |
+| Waste allowance 10% | 374 | 559 |
+| **Net** | **4,119** | **6,153** |
+| VAT 18% | 741 | 1,108 |
+| **TOTAL inc. VAT** | **4,860** | **7,261** |
 
-**Materials and hardware: roughly ILS 4,119–6,207 before VAT, ILS 4,860–7,324 with it.**
+**Materials and hardware: roughly ILS 4,119–6,153 before VAT, ILS 4,860–7,261 with it.**
 
 Excluded: carpenter labour, CNC/edging shop time, delivery, installation,
 electrical work for the LED, and the props (laundry basket, storage boxes).

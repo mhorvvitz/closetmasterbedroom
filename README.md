@@ -39,8 +39,8 @@ material against a priced rate. It exits non-zero on any mismatch.
 
 - **102 cut parts**, 8 sheets, 0 assumed joints
 - 17 mm coloured melamine at ₪280/sheet incl. cutting (**quoted**)
-- Applied edge banding at ₪8.00–8.87/m (**quoted**, 2026-08-20)
-- Materials + hardware **₪4,119–6,207 net** — labour excluded
+- Applied edge banding at ₪8.00/m (**quoted**, 2026-08-20)
+- Materials + hardware **₪4,119–6,153 net** — labour excluded
 - Board and banding prices are real; hardware and plywood rates are still assumed
 
 ## Not published here
