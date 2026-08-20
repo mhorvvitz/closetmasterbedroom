@@ -287,9 +287,10 @@ BODY = f"""
   <div class="callout">
     <p><strong>&#8362;{net_lo}&ndash;{net_hi}</strong> materials and hardware, net
     <span class="mono" style="color:var(--ink-soft)">(&#8362;{tot_lo}&ndash;{tot_hi} inc. VAT)</span></p>
-    <p class="soft">The board price is a real supplier quote &mdash; &#8362;280 per
-    2440&times;1220 sheet of {T}&nbsp;mm coloured melamine, including cutting.
-    Banding, hardware and the two plywood lines are still assumed rates.</p>
+    <p class="soft">Board and banding are real supplier quotes &mdash; &#8362;280 per
+    2440&times;1220 sheet of {T}&nbsp;mm coloured melamine including cutting, and
+    &#8362;8 per metre to apply matched edge banding. Hardware and the two plywood
+    lines are still assumed rates.</p>
     <p class="soft"><strong>Carpenter labour is excluded</strong>, and on fitted
     work it is usually the larger half of the bill.</p>
   </div>

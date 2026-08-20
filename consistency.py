@@ -71,6 +71,13 @@ print("\n3. PRICING")
 for mid in cut["material_summary"]:
     chk(mid in rates["sheets"], f"rate exists for {mid}")
 chk("NO RATE" not in read("cost.md"), "cost.md has no unpriced material")
+for q in rates.get("quotes", []):
+    chk(os.path.exists(os.path.join(HERE, q["record"])),
+        f"quote record exists: {q['record']}")
+quoted = [k for k, v in rates["sheets"].items() if v.get("_source")]
+quoted += ["banding_per_m"] if rates["banding_per_m"].get("_source") else []
+chk(read("cost.md").count("**quoted**") == len(quoted),
+    f"cost.md marks {len(quoted)} quoted rate(s), matching rates.json")
 
 print("\n4. ASSEMBLY")
 asm = read("assembly.md")

@@ -1,9 +1,9 @@
 {
-  "_note": "AUTHORED price source for costing.py. Every number here is an ASSUMED market rate for the Israeli market and MUST be replaced with real supplier quotes before this is used to commit money. Ranges are low/high for the same item, not good/bad quality. Materials and hardware only — carpenter labour, delivery and installation are NOT included.",
-  "_verify": "Board price is a real supplier quote (280/sheet incl. cutting). Banding, hardware and the ply lines are still ASSUMED.",
+  "_note": "AUTHORED price source for costing.py. A rate is an ASSUMED market rate for the Israeli market unless it carries a _source, which names the quote it came from (see the quotes list below and Suppliers/). Assumed rates MUST be replaced with real supplier quotes before this is used to commit money. Ranges are low/high for the same item, not good/bad quality. Materials and hardware only — carpenter labour, delivery and installation are NOT included.",
+  "_verify": "Board price and applied edge banding are real supplier quotes (see quotes). Hardware and the two plywood lines are still ASSUMED.",
   "currency": "ILS",
   "vat_pct": 18,
-  "vat_note": "Israeli VAT as assumed at time of writing — confirm the current rate.",
+  "vat_note": "18% confirmed by the Alfandari quote of 2026-08-20 (No 51/040609).",
   "sheets": {
     "plywood_birch_15": {
       "desc": "15mm birch plywood (drawer boxes)",
@@ -31,13 +31,14 @@
       ],
       "low": 280,
       "high": 280,
-      "_source": "supplier quote 2026-08-16: 280 ILS incl. cutting"
+      "_source": "supplier quote 2026-08-16: 280 ILS/sheet incl. cutting. The Alfandari quote of 2026-08-20 priced 12mm white at 225 — a different board, not this one."
     }
   },
   "banding_per_m": {
     "desc": "ABS edge banding, decor-matched, applied",
-    "low": 4.0,
-    "high": 8.0
+    "low": 8.0,
+    "high": 8.87,
+    "_source": "Alfandari quote 2026-08-20 No 51/040609 line 2: 62 units x 8.00 = 496 ILS, applied. Unit ambiguous: 8.00/m if per metre (55.9 m + 10% waste = 62), 8.87/m equivalent if the 62 counts the 60 banded parts. Confirm and collapse."
   },
   "hardware": [
     {
@@ -134,5 +135,42 @@
   "waste_pct": {
     "desc": "extra sheets/banding to allow for offcuts and mistakes",
     "value": 10
-  }
+  },
+  "quotes": [
+    {
+      "supplier": "אלפנדרי שיווק לבידים בע\"מ / Alfandari",
+      "doc": "הצעת מחיר No 51/040609",
+      "date": "2026-08-20",
+      "validity": "the day of issue only",
+      "vat_pct": 18,
+      "total_inc_vat": 1913.0,
+      "record": "Suppliers/quote-2026-08-20-alfandari.md",
+      "lines": [
+        {
+          "desc": "מלמין 12 צרפתי לבן טפ 244 — 12mm French-white melamine, 2440 sheet",
+          "qty": 5,
+          "unit": "sheet",
+          "price": 225.0,
+          "total": 1125.0,
+          "_note": "NOT ADOPTED into sheets: the design is 17mm coloured melamine (decision 10b). 12mm white re-derives every internal dimension, is 2.8x less stiff, and is the wrong colour. Kept as evidence only."
+        },
+        {
+          "desc": "הדבקת קנט תואם(א) — applying matched edge banding",
+          "qty": 62,
+          "unit": "m or part — confirm",
+          "price": 8.0,
+          "total": 496.0,
+          "_note": "Adopted as banding_per_m."
+        }
+      ],
+      "excludes": [
+        "cutting to the cut list (not stated — confirm)",
+        "plywood",
+        "hardware",
+        "delivery",
+        "labour",
+        "installation"
+      ]
+    }
+  ]
 }

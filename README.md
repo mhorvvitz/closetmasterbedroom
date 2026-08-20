@@ -15,6 +15,7 @@ Built with the [furniture-design skill](https://github.com/mhorvvitz/furniture-d
 | `docs/spec.md` | project record: measurements with their sources, every decision with its rationale |
 | `output/` | cut list, shop drawings, assembly plan, hardware schedule, cost, 3D render |
 | `output/רשימת-חיתוך-מלא.xls` | the supplier's own cutting-list template, filled |
+| `Suppliers/quote-*.md` | supplier quotes as received, transcribed — the evidence behind `rates.json` |
 | `prototypes/` | the STL parsers used to reverse-engineer the original model |
 | `variants/` | cut lists for the material options that were priced and rejected |
 
@@ -38,8 +39,9 @@ material against a priced rate. It exits non-zero on any mismatch.
 
 - **102 cut parts**, 8 sheets, 0 assumed joints
 - 17 mm coloured melamine at ₪280/sheet incl. cutting (**quoted**)
-- Materials + hardware **₪3,873–6,153 net** — labour excluded
-- Board price is real; banding, hardware and plywood rates are still assumed
+- Applied edge banding at ₪8.00–8.87/m (**quoted**, 2026-08-20)
+- Materials + hardware **₪4,119–6,207 net** — labour excluded
+- Board and banding prices are real; hardware and plywood rates are still assumed
 
 ## Not published here
 

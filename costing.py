@@ -5,7 +5,8 @@ DERIVED, not authored: reads output/cutlist.json (which itself derives from
 closet_spec.py) and rates.json (the authored price source). Nothing here is
 hand-typed, so the estimate cannot drift from the cut list.
 
-Every rate is an ASSUMED market price and is labelled as such in the output.
+A rate is an ASSUMED market price unless it carries a `_source` in rates.json,
+in which case it came from a real quote and the output says so, line by line.
 Carpenter labour, delivery and installation are excluded.
 
 Usage:  python costing.py            -> writes output/cost.md
@@ -28,6 +29,11 @@ def build(spec=None, outdir=None):
     return ["cost.md"]
 
 
+def basis(rate):
+    """Quoted rates carry a _source; everything else is an assumed market rate."""
+    return "**quoted**" if rate.get("_source") else "assumed"
+
+
 def _main():
     cut = json.load(open(CUT, encoding="utf-8"))
     rates = json.loads(open(RATES, encoding="utf-8-sig").read())
@@ -40,14 +46,15 @@ def _main():
     for mid, s in summary.items():
         r = rates["sheets"].get(mid)
         if r is None:
-            rows.append((mid, "?", "—", "—", "**NO RATE — add to rates.json**"))
+            rows.append((mid, "?", "—", "—", "**NO RATE — add to rates.json**",
+                         "—"))
             continue
         n = s["sheets_est"]
         lo, hi = n * r["low"], n * r["high"]
         sheet_lo += lo
         sheet_hi += hi
         rows.append((r["desc"], n, f"{lo:,.0f}", f"{hi:,.0f}",
-                     f"{s['parts']} parts · {s['area']:.2f} m²"))
+                     f"{s['parts']} parts · {s['area']:.2f} m²", basis(r)))
 
     band_m = sum(s.get("band_m", 0.0) for s in summary.values())
     b = rates["banding_per_m"]
@@ -71,25 +78,26 @@ def _main():
     a = L.append
     a("# Materials cost estimate — Master Bedroom Walk-In Closet\n")
     a(f"Currency: **{CUR}**. Derived from `output/cutlist.json` + `rates.json`.\n")
-    a("> ⚠️ **Every rate below is an ASSUMED market price, not a quote.** Replace the\n"
-      "> numbers in `rates.json` with real supplier prices before committing money.\n"
+    a("> ⚠️ **Every rate below is an ASSUMED market price unless its row says\n"
+      "> _quoted_.** Replace the assumed numbers in `rates.json` with real supplier\n"
+      "> prices before committing money.\n"
       "> **Carpenter labour, delivery and installation are NOT included** — on a job\n"
       "> like this they are usually the larger half of the bill.\n")
 
     a("\n## Boards\n")
-    a(f"| Material | Sheets (est.) | {CUR} low | {CUR} high | Basis |")
-    a("|---|---:|---:|---:|---|")
-    for d, n, lo, hi, note in rows:
-        a(f"| {d} | {n} | {lo} | {hi} | {note} |")
-    a(f"| **Boards subtotal** | | **{sheet_lo:,.0f}** | **{sheet_hi:,.0f}** | |")
+    a(f"| Material | Sheets (est.) | {CUR} low | {CUR} high | Basis | Price source |")
+    a("|---|---:|---:|---:|---|---|")
+    for d, n, lo, hi, note, src in rows:
+        a(f"| {d} | {n} | {lo} | {hi} | {note} | {src} |")
+    a(f"| **Boards subtotal** | | **{sheet_lo:,.0f}** | **{sheet_hi:,.0f}** | | |")
     a("\nSheet counts come from the cut list's yield heuristic, **not** an optimised\n"
       "nesting plan. Run OpenCutList or CutList Optimizer on the real parts for a\n"
       "firm sheet count — it can move this line by a whole sheet either way.\n")
 
     a("\n## Edge banding\n")
-    a(f"| Item | Metres | {CUR} low | {CUR} high |")
-    a("|---|---:|---:|---:|")
-    a(f"| {b['desc']} | {band_m:.1f} | {band_lo:,.0f} | {band_hi:,.0f} |")
+    a(f"| Item | Metres | {CUR} low | {CUR} high | Price source |")
+    a("|---|---:|---:|---:|---|")
+    a(f"| {b['desc']} | {band_m:.1f} | {band_lo:,.0f} | {band_hi:,.0f} | {basis(b)} |")
 
     a("\n## Hardware\n")
     a(f"| Item | Qty | {CUR} low | {CUR} high |")
@@ -97,6 +105,18 @@ def _main():
     for item, qty, lo, hi in hw_rows:
         a(f"| {item} | {qty} | {lo} | {hi} |")
     a(f"| **Hardware subtotal** | | **{hw_lo:,.0f}** | **{hw_hi:,.0f}** |")
+
+    q = rates.get("quotes") or []
+    if q:
+        a("\n## Quotes on file\n")
+        a("| Supplier | Document | Date | Covers | Record |")
+        a("|---|---|---|---|---|")
+        for qq in q:
+            covers = "; ".join(l["desc"].split(" — ")[-1] for l in qq["lines"])
+            a(f"| {qq['supplier']} | {qq['doc']} | {qq['date']} | {covers} "
+              f"| `{qq['record']}` |")
+        a("\nQuoted rates above trace to these. Read the record files for what each\n"
+          "quote excludes and how long it stays valid.\n")
 
     a("\n## Total\n")
     a(f"| | {CUR} low | {CUR} high |")
