@@ -168,6 +168,7 @@ Diagonal geometry, from the step corner (X 1280, Z 400) at 45°:
 | 10 | ~~All deck panels 25 mm~~ → **SUPERSEDED by 10b** | Was: 25 mm carries the 807/826 front-edge span unaided, so no valance is needed. |
 | 10b | **Board is 17 mm throughout** — supplier's coloured melamine, ₪280/sheet incl. cutting (rev I, user) | The colour is only made in 17 mm. Every internal dimension re-derives: tower clear **566**, drawer box **540**, upright height **333**, deck 1 top **1917**. |
 | 10c | **Deck load limit accepted rather than re-stiffened** (rev I, user — option 3) | 17 mm is (25/17)³ ≈ **3.2× less stiff** than the 25 mm this was drawn at, and the stiffening rail was deliberately removed at rev D. Offered three fixes — 25 mm in colour, reinstate the rail, or accept — and **accept** was chosen. Consequence is now carried as a stated load limit rather than a hidden risk. |
+| 10d | **The 12 mm white board quoted on 2026-08-20 is not adopted** (Alfandari No 51/040609, ₪225/sheet) | It is a different material, not a cheaper price for the same one. 12 mm re-derives every internal dimension, is (17/12)³ ≈ **2.8× less stiff** than 17 mm — which would drop the deck limit of decision 10c from ~15 kg to roughly **5 kg** per back panel — cannot take a 7 mm confirmat, and is white rather than the chosen colour. The board line stays at ₪280 for 17 mm coloured; the quote's **banding** line is adopted. Full record: `Suppliers/quote-2026-08-20-alfandari.md`. |
 | 10a | LED channel moves to the **underside of deck 1's back panel**, set back 40 mm from the front edge | Its old home was the valance. Surface-mounted channel, inset in X clear of the wall cleats. |
 | 11 | **One** divider only between the decks over the hanging zone, on the centre line — a straight continuation of the hanging divider (rev C2, user) | The hanging zone reads as one clean opening from floor to deck 2, broken by a single vertical line. The quarter-point uprights I had at X 400 and 1200 are deleted. |
 | 11a | Deck 2's span handled by its 25 mm thickness (rev D) | Supersedes the deck-2 valance from rev C2. Both upper bays are back to their full **325 mm** clear. |
@@ -187,6 +188,7 @@ Diagonal geometry, from the step corner (X 1280, Z 400) at 45°:
 | 19 | **Board-finish swatches** in the render: oak / **sage green** / **light blue** / white / grey (rev G, user) | All melamine parts share one material, so one click re-finishes carcass, shelves, decks, drawer fronts and shaker trim together. The plywood drawer boxes and the metal rods/pulls deliberately do **not** follow. Finish is a decor choice; it changes nothing dimensional, so the cut list is unaffected. A `?finish=sage` URL parameter selects one on load, so a specific finish can be linked or captured. |
 | 19a | **Pulls in brass / gold** (rev G, user) | Rendered as a true metallic (metalness 0.9, low roughness) rather than a painted colour, so they read as metal against any board finish. Six pulls; they hold the brass tone whichever finish is selected. |
 | 20 | **Cost estimate is derived, not authored** — `costing.py` reads `output/cutlist.json` + `rates.json` | The estimate can never drift from the cut list. `rates.json` is the single authored price file; every number in it is an assumed market rate, clearly flagged, for replacement with real quotes. Labour is excluded. |
+| 20a | **Quotes are transcribed into `Suppliers/`, and every rate that came from one carries a `_source`** | A price with no provenance is an assumption wearing a suit. `costing.py` reads the flag and marks each line **quoted** or *assumed* in `cost.md`, and lists the quotes on file, so the estimate says which half of itself is real. |
 
 ---
 
@@ -217,6 +219,13 @@ Diagonal geometry, from the step corner (X 1280, Z 400) at 45°:
 7. **Shaker front detail**: specified as one-piece routed MDF. A 5-piece applied
    frame is the alternative — confirm which your shop does.
 8. **Board decor, lacquer colour, and edge-banding colour** to confirm.
+8a. ~~Is cutting included in the board price?~~ — **CLOSED (2026-08-20, user)**.
+   It is, on both quotes, even though the 2026-08-20 sheet shows no separate
+   cutting line. Sheet prices are cut-to-list prices.
+8b. ~~Edge-banding unit~~ — **CLOSED (2026-08-20, user)**. The quote's 62 × ₪8
+   is **per metre**: 55.9 m plus the 10% waste allowance. It is not a part
+   count — no count in the job lands on 62 (72 melamine parts, 60 carrying a
+   banding instruction, 36 without the shaker trim, 116 banded edges).
 9. **Wall substrate** for the cleats and wall fixings — concrete/block vs
    plasterboard needs entirely different anchors.
 10. **Floor level.** If out of level, the towers need levelling feet or a
@@ -240,11 +249,14 @@ closet_spec.py  (positioned-part spec via scripts/carcass.py)
      ├─► hardware.md                     hardware schedule
      ├─► cost.md                         materials estimate  ◄── rates.json
      └─► packet.pdf                      the carpenter packet
+
+Suppliers/quote-*.md  (transcribed supplier quotes) ──► rates.json _source
 ```
 
 Three authored sources of truth: **this file** (design inputs), **`rates.json`**
 (prices), and the skill's **`assets/joinery.json`** (drilling specs). Everything
-else is derived.
+else is derived. `Suppliers/quote-*.md` sits behind `rates.json`: it is evidence,
+transcribed as received, not an input anything reads.
 
 Regenerate after any change:
 

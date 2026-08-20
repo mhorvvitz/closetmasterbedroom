@@ -2,20 +2,21 @@
 
 Currency: **ILS**. Derived from `output/cutlist.json` + `rates.json`.
 
-> ⚠️ **Every rate below is an ASSUMED market price, not a quote.** Replace the
-> numbers in `rates.json` with real supplier prices before committing money.
+> ⚠️ **Every rate below is an ASSUMED market price unless its row says
+> _quoted_.** Replace the assumed numbers in `rates.json` with real supplier
+> prices before committing money.
 > **Carpenter labour, delivery and installation are NOT included** — on a job
 > like this they are usually the larger half of the bill.
 
 
 ## Boards
 
-| Material | Sheets (est.) | ILS low | ILS high | Basis |
-|---|---:|---:|---:|---|
-| 17mm coloured melamine, 2440x1220 — SUPPLIER QUOTED, incl. cutting | 6 | 1,680 | 1,680 | 72 parts · 12.79 m² |
-| 15mm birch plywood (drawer boxes) | 1 | 260 | 380 | 24 parts · 1.79 m² |
-| 6mm birch plywood (grooved drawer bottoms) | 1 | 120 | 200 | 6 parts · 0.95 m² |
-| **Boards subtotal** | | **2,060** | **2,260** | |
+| Material | Sheets (est.) | ILS low | ILS high | Basis | Price source |
+|---|---:|---:|---:|---|---|
+| 17mm coloured melamine, 2440x1220 — SUPPLIER QUOTED, incl. cutting | 6 | 1,680 | 1,680 | 72 parts · 12.79 m² | **quoted** |
+| 15mm birch plywood (drawer boxes) | 1 | 260 | 380 | 24 parts · 1.79 m² | assumed |
+| 6mm birch plywood (grooved drawer bottoms) | 1 | 120 | 200 | 6 parts · 0.95 m² | assumed |
+| **Boards subtotal** | | **2,060** | **2,260** | | |
 
 Sheet counts come from the cut list's yield heuristic, **not** an optimised
 nesting plan. Run OpenCutList or CutList Optimizer on the real parts for a
@@ -24,9 +25,9 @@ firm sheet count — it can move this line by a whole sheet either way.
 
 ## Edge banding
 
-| Item | Metres | ILS low | ILS high |
-|---|---:|---:|---:|
-| ABS edge banding, decor-matched, applied | 55.9 | 224 | 447 |
+| Item | Metres | ILS low | ILS high | Price source |
+|---|---:|---:|---:|---|
+| ABS edge banding, decor-matched, applied | 55.9 | 447 | 447 | **quoted** |
 
 ## Hardware
 
@@ -49,20 +50,30 @@ firm sheet count — it can move this line by a whole sheet either way.
 | PIR / door switch | 1 | 60 | 150 |
 | **Hardware subtotal** | | **1,237** | **2,886** |
 
+## Quotes on file
+
+| Supplier | Document | Date | Covers | Record |
+|---|---|---|---|---|
+| אלפנדרי שיווק לבידים בע"מ / Alfandari | הצעת מחיר No 51/040609 | 2026-08-20 | 12mm French-white melamine, 2440 sheet; applying matched edge banding | `Suppliers/quote-2026-08-20-alfandari.md` |
+
+Quoted rates above trace to these. Read the record files for what each
+quote excludes and how long it stays valid.
+
+
 ## Total
 
 | | ILS low | ILS high |
 |---|---:|---:|
 | Boards | 2,060 | 2,260 |
-| Edge banding | 224 | 447 |
+| Edge banding | 447 | 447 |
 | Hardware | 1,237 | 2,886 |
-| Subtotal | 3,521 | 5,594 |
-| Waste allowance 10% | 352 | 559 |
-| **Net** | **3,873** | **6,153** |
-| VAT 18% | 697 | 1,108 |
-| **TOTAL inc. VAT** | **4,570** | **7,261** |
+| Subtotal | 3,744 | 5,594 |
+| Waste allowance 10% | 374 | 559 |
+| **Net** | **4,119** | **6,153** |
+| VAT 18% | 741 | 1,108 |
+| **TOTAL inc. VAT** | **4,860** | **7,261** |
 
-**Materials and hardware: roughly ILS 3,873–6,153 before VAT, ILS 4,570–7,261 with it.**
+**Materials and hardware: roughly ILS 4,119–6,153 before VAT, ILS 4,860–7,261 with it.**
 
 Excluded: carpenter labour, CNC/edging shop time, delivery, installation,
 electrical work for the LED, and the props (laundry basket, storage boxes).
