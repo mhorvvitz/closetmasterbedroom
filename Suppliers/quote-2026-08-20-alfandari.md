@@ -51,23 +51,22 @@ worth one sentence when the order is placed.
 
 ## What this quote does and does not cover
 
-Covered: **boards and banding application only.**
+Covered: **boards, cutting, and banding application.** Cutting to the cut list
+is included in the board price — confirmed by the client, 2026-08-20. The sheet
+carries no separate cutting line because there is nothing separate to bill.
 
 Not covered — all still unpriced or on assumed rates:
 
 - the **15 mm birch ply** drawer boxes (24 parts) and the **6 mm ply** drawer
   bottoms (6 parts);
 - **all hardware** — runners, pulls, rods, brackets, confirmats, LED;
-- **cutting to the cut list.** The ₪280 board price on file was explicitly
-  *incl. cutting*; this sheet has no cutting line at all. Ask whether cutting
-  is included in the ₪225, or billed per cut.
 - delivery, carpenter labour, installation.
 
 ## How it compares to what the project assumes
 
 | Item | `rates.json` before | This quote | Effect |
 |---|---|---|---|
-| Board, per 2440×1220 sheet | ₪280 (17 mm coloured, incl. cutting) | ₪225 (12 mm French white) | **different board — see below** |
+| Board, per 2440×1220 sheet | ₪280 (17 mm coloured, incl. cutting) | ₪225 (12 mm French white, incl. cutting) | **different board — see below** |
 | Applied edge banding, per m | ₪4.00–8.00 assumed | ₪8.00 (or ₪8.87/m — see unit note) | now **quoted**, at the top of the assumed range |
 | VAT | 18% assumed | 18% | confirmed |
 
@@ -114,8 +113,8 @@ thinner white board costs, not as a price for this job.
 
 ## To put back to the supplier
 
-1. Price **17 mm coloured** melamine, same sheet size, and say whether cutting
-   to our list is included.
+1. Price **17 mm coloured** melamine, same sheet size, cutting included on the
+   same basis as this quote.
 2. Confirm the banding line unit — per metre or per part.
 3. Confirm the 62 against our **55.9 m** requirement (`output/cutlist.json`).
 4. Confirm the sheet size behind "טפ 244" — the cut list assumes 2440 × 1220.

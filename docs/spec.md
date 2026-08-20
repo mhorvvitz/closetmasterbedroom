@@ -219,8 +219,9 @@ Diagonal geometry, from the step corner (X 1280, Z 400) at 45°:
 7. **Shaker front detail**: specified as one-piece routed MDF. A 5-piece applied
    frame is the alternative — confirm which your shop does.
 8. **Board decor, lacquer colour, and edge-banding colour** to confirm.
-8a. **Is cutting included in the ₪280 board price?** The 2026-08-16 quote said it
-   was; the 2026-08-20 quote has no cutting line at all. Confirm before ordering.
+8a. ~~Is cutting included in the board price?~~ — **CLOSED (2026-08-20, user)**.
+   It is, on both quotes, even though the 2026-08-20 sheet shows no separate
+   cutting line. Sheet prices are cut-to-list prices.
 8b. **Edge-banding unit**: the quote reads 62 × ₪8. That is either ₪8.00/m
    (55.9 m + waste) or ₪8/part (60 banded parts). Confirm and collapse the
    ₪8.00–8.87/m range in `rates.json`.

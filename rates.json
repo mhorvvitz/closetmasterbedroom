@@ -31,7 +31,7 @@
       ],
       "low": 280,
       "high": 280,
-      "_source": "supplier quote 2026-08-16: 280 ILS/sheet incl. cutting. The Alfandari quote of 2026-08-20 priced 12mm white at 225 — a different board, not this one."
+      "_source": "supplier quote 2026-08-16: 280 ILS/sheet incl. cutting. The Alfandari quote of 2026-08-20 priced 12mm white at 225, also incl. cutting — a different board, not this one."
     }
   },
   "banding_per_m": {
@@ -164,12 +164,14 @@
         }
       ],
       "excludes": [
-        "cutting to the cut list (not stated — confirm)",
         "plywood",
         "hardware",
         "delivery",
         "labour",
         "installation"
+      ],
+      "includes": [
+        "cutting to the cut list (confirmed by the client, 2026-08-20)"
       ]
     }
   ]
